@@ -1,7 +1,6 @@
 #lang racket/base
 
-(require (except-in (planet cobbe/contract-utils:1/contract-utils) predicate/c)
-         racket/contract
+(require racket/contract
          racket/async-channel
          racket/path)
 
@@ -301,7 +300,7 @@
                   . ->* .
                   exact-integer/c)]
  [integer->bytes ((exact-integer/c boolean?)
-                  (boolean? (optional/c natural-number/c))
+                  (boolean? (or/c #f natural-number/c))
                   . ->* .
                   bytes?)]
  [seekable-port? (port? . -> . boolean?)]
@@ -339,7 +338,7 @@
                . ->* .
                any)]
  [write-integer ((exact-integer/c boolean?)
-                 (output-port? boolean? (optional/c natural-number/c))
+                 (output-port? boolean? (or/c #f natural-number/c))
                  . ->* .
                  any)]
  [write-c-string ((bytes?)
