@@ -3,20 +3,14 @@
 (require racket/async-channel
          racket/match
          rackunit
-         (except-in (planet dherman/test:1/test) in-this-directory)
          mzlib/etc
          racket/port
          file/gunzip
+         file/in-new-directory
          racket/runtime-path
          "../../main.rkt")
 
 (require/expose "../../main.rkt" (ones-mask make-filter-input-port/debug))
-
-(define-runtime-path here ".")
-
-(define-syntax-rule (in-this-directory e1 e2 ...)
-  (parameterize ([current-directory here])
-    e1 e2 ...))
 
 (define test:ones-mask
   (test-suite

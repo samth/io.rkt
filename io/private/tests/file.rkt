@@ -4,8 +4,9 @@
          racket/contract
          racket/path
          racket/runtime-path
-         (planet dherman/test:1/test)
          mzlib/etc
+         file/in-new-directory
+         (only-in srfi/1 lset=)
          "../../file.rkt")
 
 (define root-directory
@@ -131,7 +132,7 @@
                                 (let ([e (build-path "a" "b" "c" "d" "e")])
                                   (make-directory* e)
                                   (check (lambda (ls1 ls2)
-                                           (list-permutation? ls1 ls2 path=?))
+                                           (lset= path=? ls1 ls2))
                                          (explode-relative-path e)
                                          (map build-path (list "a" "b" "c" "d" "e"))))))
    (test-case "telescope-relative-path"
@@ -139,7 +140,7 @@
                                 (let ([e (build-path "a" "b" "c" "d" "e")])
                                   (make-directory* e)
                                   (check (lambda (ls1 ls2)
-                                           (list-permutation? ls1 ls2 path=?))
+                                           (lset= path=? ls1 ls2))
                                          (telescope-relative-path e)
                                          (list (build-path "a")
                                                (build-path "a" "b")
@@ -166,7 +167,7 @@
                                   (make-file (build-path "a" "b" "file2.txt"))
                                   (make-file (build-path "c" "file3.txt"))
                                   (check (lambda (ls1 ls2)
-                                           (list-permutation? ls1 ls2 path=?))
+                                           (lset= path=? ls1 ls2))
                                          (directory-list/all)
                                          (list (build-path "a")
                                                (build-path "a" "b")
