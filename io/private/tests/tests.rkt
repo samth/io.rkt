@@ -1,6 +1,6 @@
 #lang racket
 
-(require rackunit rackunit/gui "io.rkt" "file.rkt")
+(require rackunit rackunit/gui rackunit/text-ui "io.rkt" "file.rkt")
 
 (define all-tests
   (test-suite
@@ -8,4 +8,5 @@
    io-tests
    file-tests))
 
-(test/gui all-tests)
+(module+ main (test/gui all-tests))
+(module+ test (run-tests all-test))
