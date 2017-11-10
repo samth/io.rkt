@@ -9,4 +9,4 @@
    file-tests))
 
 (module+ main (test/gui all-tests))
-(module+ test (run-tests all-test))
+(module+ test (run-tests all-tests))
